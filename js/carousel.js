@@ -139,4 +139,47 @@ $(document).ready(function () {
     statusBar.addEventListener("pointerup", stopDragging);
     statusBar.addEventListener("pointercancel", stopDragging);
 
+    /* 마우스 원 따라오기 */
+
+    const cursorCircle = document.querySelector(".cursor_circle");
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let circleX = 0;
+    let circleY = 0;
+
+    document.addEventListener("pointermove", function (event) {
+        if (!cursorCircle || event.pointerType === "touch") return;
+
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+
+        cursorCircle.style.opacity = "1";
+
+        if (event.target.closest(".contents_box")) {
+            cursorCircle.classList.add("active");
+        } else {
+            cursorCircle.classList.remove("active");
+        }
+    });
+
+    document.addEventListener("mouseleave", function () {
+        if (!cursorCircle) return;
+
+        cursorCircle.style.opacity = "0";
+    });
+
+    function moveCursorCircle() {
+        /* 숫자가 작을수록 더 느리게 따라옴 */
+        circleX += (mouseX - circleX) * 0.14;
+        circleY += (mouseY - circleY) * 0.14;
+
+        cursorCircle.style.left = circleX + "px";
+        cursorCircle.style.top = circleY + "px";
+
+        requestAnimationFrame(moveCursorCircle);
+    }
+
+    moveCursorCircle();
+
 });
