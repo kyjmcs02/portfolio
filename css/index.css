@@ -1,7 +1,8 @@
 
 .main {
     width: 100%; height: 100vh;
-    display: flex; flex-direction: column;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     background-color: #FFFDF8;
     overflow: hidden;
@@ -10,7 +11,7 @@
 .title_wrap_top {
     width: 100%;
     height: 32px;
-    margin: 16px 0 0;
+    margin: 10px 0 0;
     padding: 0;
     overflow: hidden;
    
@@ -55,14 +56,15 @@
     }
 }
 
-.contents_wrap {
+.contents{
     width: 1192px;
     max-width: calc(100% - 80px);
     margin: 0 auto;
     position: relative;
-    padding-bottom: 80px; --bar-left: 0%;
     transform: translateY(-10px);
 }
+
+.contents_wrap { width: 100%;}
 
 .contents_wrap a { text-decoration: none;}
 
@@ -82,33 +84,53 @@
 
 .contents_box:hover .img_box img { filter: grayscale(0%); transform: scale(1.05); }
 
-.contents_wrap::before,
-.contents_wrap::after {
-    z-index: 10;
-    pointer-events: none;
+.status_bar {
+    width: 100%;
+    height: 14px;
+    margin-top: 70px;
+    position: relative;
 }
 
 /* 회색 전체 선 */
-.contents_wrap::before {
+.status_bar::before {
     content: "";
     width: 100%;
     height: 2px;
+
     position: absolute;
     left: 0;
-    bottom: 0;
+    top: 6px;
+
     background-color: #d8d8d8;
 }
 
-/* 움직이는 파란 선 */
-.contents_wrap::after {
-    content: "";
+/* 마우스로 잡는 파란 바 영역 */
+.status_thumb {
     width: 39%;
-    height: 2px;
+    height: 14px;
+
     position: absolute;
-    left: var(--bar-left);
-    bottom: 0;
+    left: 0;
+    top: 0;
+
+    cursor: grab;
+}
+
+/* 실제로 보이는 파란 선 */
+.status_thumb::after {
+    content: "";
+    width: 100%;
+    height: 2px;
+
+    position: absolute;
+    left: 0;
+    top: 6px;
+
     background-color: #1681f8;
-    transition: left 0.5s ease;
+}
+
+.status_thumb:active {
+    cursor: grabbing;
 }
 
 
