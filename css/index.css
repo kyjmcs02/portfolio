@@ -70,8 +70,9 @@
 
 .contents_box { width: 100%; display: flex; flex-direction: column; }
 
-.contents_box .contents_title_medium { margin-bottom: 12px; line-height: 20px; }
+.contents_box .contents_title_medium { margin-bottom: 12px; line-height: 20px; transition: color 0.3s ease; }
 
+.contents_box:hover .contents_title_medium { color: #1681f8; }
 .contents_box.no_title { padding-top: 32px; }
 
 .img_box { width: 100%; overflow: hidden; margin-bottom: 6px; }
@@ -170,3 +171,38 @@
     padding-right: 20px;
 }
 
+.cursor_circle {
+    width: 16px;
+    height: 16px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+
+    background-color: #1681f8;
+    border-radius: 50%;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transform: translate(-50%, -50%);
+
+    transition:
+        width 0.3s ease,
+        height 0.3s ease,
+        opacity 0.3s ease;
+}
+
+/* 카드 위에서는 조금 커짐 */
+.cursor_circle.active {
+    width: 32px;
+    height: 32px;
+    opacity: 0.65 !important;
+}
+
+@media (hover: none), (pointer: coarse) {
+    .cursor_circle {
+        display: none;
+    }
+}
