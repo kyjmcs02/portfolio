@@ -1,0 +1,150 @@
+
+.main {
+    width: 100%; height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    background-color: #FFFDF8;
+    overflow: hidden;
+}
+
+.title_wrap_top {
+    width: 100%;
+    height: 32px;
+    margin: 16px 0 0;
+    padding: 0;
+    overflow: hidden;
+   
+
+    display: flex;
+    align-items: center;
+}
+
+.title_track {
+    width: max-content;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    animation: titleFlow 40s linear infinite;
+}
+
+.title_box {
+    width: 1050px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.title_box .contents_title_large {
+    flex: 0 0 33.333%;
+    margin: 0;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    color: #1681f8;
+}
+
+@keyframes titleFlow {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-1050px);
+    }
+}
+
+.contents_wrap {
+    width: 1192px;
+    max-width: calc(100% - 80px);
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 80px; --bar-left: 0%;
+    transform: translateY(-10px);
+}
+
+.contents_wrap a { text-decoration: none;}
+
+.contents_box { width: 100%; display: flex; flex-direction: column; }
+
+.contents_box .contents_title_medium { margin-bottom: 12px; line-height: 20px; }
+
+.contents_box.no_title { padding-top: 32px; }
+
+.img_box { width: 100%; overflow: hidden; margin-bottom: 6px; }
+
+.img_box img { width: 100%; display: block;
+    filter: grayscale(100%);
+    transform: scale(1);
+    transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+.contents_box:hover .img_box img { filter: grayscale(0%); transform: scale(1.05); }
+
+.contents_wrap::before,
+.contents_wrap::after {
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* 회색 전체 선 */
+.contents_wrap::before {
+    content: "";
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: #d8d8d8;
+}
+
+/* 움직이는 파란 선 */
+.contents_wrap::after {
+    content: "";
+    width: 39%;
+    height: 2px;
+    position: absolute;
+    left: var(--bar-left);
+    bottom: 0;
+    background-color: #1681f8;
+    transition: left 0.5s ease;
+}
+
+
+.article_box { display: flex; justify-content: space-between; align-items: center; }
+
+
+.title_wrap_bottom {
+    width: 100%;
+    height: 30px;
+    margin: 0 ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    background-color: #1681f8;
+    
+}
+
+.title_wrap_bottom .contents_title_large {
+    margin: 0;
+    font-size: 14px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.title_wrap_bottom .contents_title_large:first-child {
+    padding-left: 20px;
+}
+
+.title_wrap_bottom .contents_title_large:nth-child(2) {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.title_wrap_bottom .contents_title_large:last-child {
+    padding-right: 20px;
+}
+
