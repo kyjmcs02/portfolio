@@ -6,7 +6,7 @@ $(document).ready(function () {
     const statusThumb = document.querySelector(".status_thumb");
 
     const visibleItems = 5;
-    const loopMode = true;
+    const loopMode = false;
 
     let totalItems = 0;
     let maxIndex = 0;
@@ -35,18 +35,19 @@ $(document).ready(function () {
         "initialized.owl.carousel changed.owl.carousel",
         function (event) {
 
-            if (!event.item || !event.relatedTarget) {
+            if (!event.item) {
                 return;
             }
 
             totalItems = event.item.count;
 
-            maxIndex = loopMode
-                ? totalItems - 1
-                : Math.max(totalItems - visibleItems, 0);
+            maxIndex = Math.max(totalItems - visibleItems, 0);
 
-            currentIndex =
-                event.relatedTarget.relative(event.item.index);
+            currentIndex = event.item.index;
+
+            if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
+            }
 
             if (!dragging) {
                 updateStatusThumb(currentIndex);
@@ -58,7 +59,7 @@ $(document).ready(function () {
     carousel.owlCarousel({
         items: visibleItems,
         margin: 20,
-        loop: loopMode,
+        loop: false,
         nav: false,
         dots: false,
         slideBy: 1,
